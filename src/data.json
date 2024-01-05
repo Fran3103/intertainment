@@ -369,7 +369,7 @@
     "thumbnail": {
       "regular": {
         "small": "/assets/thumbnails/dogs/regular/small.jpg",
-        "medium": "/assets/thumbnails/dogs/regular/medium.jpg",
+        "medium": "/thumbnails/dogs/regular/medium.jpg",
         "large": "/assets/thumbnails/dogs/regular/large.jpg"
       }
     },
@@ -384,7 +384,7 @@
     "thumbnail": {
       "regular": {
         "small": "/assets/thumbnails/asia-in-24-days/regular/small.jpg",
-        "medium": "/assets/thumbnails/asia-in-24-days/regular/medium.jpg",
+        "medium": "/thumbnails/asia-in-24-days/regular/medium.jpg",
         "large": "/assets/thumbnails/asia-in-24-days/regular/large.jpg"
       }
     },
