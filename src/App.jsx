@@ -5,6 +5,7 @@ import Home from './Components/Home'
 import Movies from './Components/Movies'
 import Series from './Components/Series'
 import Bookmark from './Components/Bookmark'
+import Search from './Components/Search'
 
 
 function App() {
@@ -12,9 +13,10 @@ function App() {
 
   return (
     <>
-      <h1 className='text-3xl text-red-400'>hola mundo</h1>
+       
       
       <Navbar/>
+      <Search/>
       <Routes>
             <Route path='/' element={<Home/>}/>
             <Route path='/movies' element={<Movies/>}/>
