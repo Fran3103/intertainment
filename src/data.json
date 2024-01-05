@@ -368,9 +368,9 @@
     "title": "Dogs",
     "thumbnail": {
       "regular": {
-        "small": "src/assets/thumbnails/dogs/regular/small.jpg",
-        "medium": "src/assets/thumbnails/dogs/regular/medium.jpg",
-        "large": "src/assets/thumbnails/dogs/regular/large.jpg"
+        "small": "/assets/thumbnails/dogs/regular/small.jpg",
+        "medium": "/assets/thumbnails/dogs/regular/medium.jpg",
+        "large": "/assets/thumbnails/dogs/regular/large.jpg"
       }
     },
     "year": 2016,
@@ -383,9 +383,9 @@
     "title": "Asia in 24 Days",
     "thumbnail": {
       "regular": {
-        "small": "src/assets/thumbnails/asia-in-24-days/regular/small.jpg",
-        "medium": "src/assets/thumbnails/asia-in-24-days/regular/medium.jpg",
-        "large": "src/assets/thumbnails/asia-in-24-days/regular/large.jpg"
+        "small": "/assets/thumbnails/asia-in-24-days/regular/small.jpg",
+        "medium": "/assets/thumbnails/asia-in-24-days/regular/medium.jpg",
+        "large": "/assets/thumbnails/asia-in-24-days/regular/large.jpg"
       }
     },
     "year": 2020,
