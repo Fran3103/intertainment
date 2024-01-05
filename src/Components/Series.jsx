@@ -2,7 +2,7 @@
 
 const Series = () => {
   return (
-    <div>Series</div>
+    <div className="md:ml-36 md:m-8 ">Series</div>
   )
 }
 

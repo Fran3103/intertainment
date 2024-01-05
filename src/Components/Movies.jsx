@@ -2,7 +2,7 @@
 
 const Movies = () => {
   return (
-    <div>Movies</div>
+    <div className="md:ml-36 md:m-8 ">Movies</div>
   )
 }
 
