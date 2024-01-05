@@ -13,8 +13,8 @@ function App() {
             return (
                 <div key={peli.title}>
                     <img src={peli.thumbnail.regular.medium} alt={peli.title} />
-                    <img src="public\image-avatar.png" alt="icono"  />
-                    <img src="C:\Users\Usuario\Desktop\Proyectos\Reacts\intertainment\public\image-avatar.png" alt="icono"  />
+                    <img src="\image-avatar.png" alt="icono"  />
+                   
                 </div>
             )
         })
