@@ -19,7 +19,7 @@ const Navbar = () => {
   };
 
   return (
-    <nav className="bg-[#161d2f] fixed w-full top-0 md:w-28 md:h-[98%] md:m-2 md:rounded-xl">
+    <nav className="bg-[#161d2f] fixed z-50 w-full top-0 md:w-28 md:h-[98%] md:m-2 md:rounded-xl">
       <div className="max-w-screen-xl flex items-center justify-between p-6 md:flex-col h-full px-4">
         <Link to="/">
           <img src={logo} className="md:mt-4 md:size-8" alt=" Logo" />

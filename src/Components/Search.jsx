@@ -15,7 +15,7 @@ const Search = () => {
 
     
   return (
-    <div className='flex items-center mt-20 w-full gap-3 p-3 md:ml-32 md:m-8 '>
+    <div className='flex  fixed top-0 z-50 items-center mt-20 gap-3 p-3 md:ml-32 md:m-8 '>
         <img src={search} alt="search" className='w-9' />
         <form action="" onChange={onChange} onSubmit={onSubmit} className='w-full'>
             

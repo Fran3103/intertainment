@@ -5,7 +5,23 @@ export default {
       "./src/**/*.{js,ts,jsx,tsx}",
     ],
     theme: {
-      extend: {},
+      extend: {
+        gridTemplateColumns: {
+            // Simple 16 column grid
+            '16': 'repeat(16, minmax(0, 1fr))'}
+      },
+      screens: {
+        'md': '700px',
+        // => @media (min-width: 640px) { ... }
+  
+        'xl': '1024px',
+        // => @media (min-width: 1024px) { ... }
+  
+        '2xl': '1280px',
+        // => @media (min-width: 1280px) { ... }
+        '3xl': '1440px'
+         // => @media (min-width: 1440px) { ... }
+      },
       colors:{
         'red': '#FC4747',
         'white':'#ffffff',
