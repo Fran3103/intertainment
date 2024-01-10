@@ -1,0 +1,14 @@
+#slider{
+    position: relative;
+    overflow: hidden;
+    scroll-snap-type: x mandatory;
+    
+}
+
+#slider {
+    position: sticky;
+    object-fit: cover;
+    scroll-snap-align: center;
+    
+
+}
