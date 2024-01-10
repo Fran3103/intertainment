@@ -1,12 +1,12 @@
 import { Link } from 'react-router-dom';
 import data from '../data.json';
-
+import PropTypes from 'prop-types'
 import guardar from '../assets/icon-bookmark-empty.svg';
 import guardado from '../assets/icon-bookmark-full.svg';
 import { useRef, useState } from 'react';
 import { MdKeyboardArrowRight, MdKeyboardArrowLeft } from "react-icons/md"
 
-const Trending = () => {
+const Trending = ({ añadirOEliminar } ) => {
     const dataTrending = data.filter((trend) => trend.thumbnail.trending);
     const [activeList, setActiveList] = useState(new Array(dataTrending.length).fill(true));
     const [currentSlide, setCurrentSlide] = useState(0);
@@ -29,7 +29,7 @@ const Trending = () => {
         const nextSlide = (currentSlide + 1) % dataTrending.length;
         setCurrentSlide(nextSlide);
         handleScroll(containerRef.current.clientWidth); // Mueve el scroll al ancho del contenedor
-        console.log(containerRef.current.clientWidth)
+       
     };
 
     const izquierda = () => {
@@ -42,7 +42,9 @@ const Trending = () => {
 
 
 
-
+    Trending.propTypes = {
+        añadirOEliminar: PropTypes.func.isRequired,
+      };
 
     
     return (
@@ -54,24 +56,27 @@ const Trending = () => {
             <div className='h-[140px] md:h-[230px] flex gap-2 overflow-hidden overflow-x-hidden' ref={containerRef}>
                 {dataTrending.map((trend, index) => (
                     <div key={trend.title} className='  h-[140px] md:h-[230px]'  >
-                        <div className='w-[240px] h-[140px]  md:w-[470px] md:h-[230px] rounded-xl relative'>
-                            <img src={trend.thumbnail.trending?.small} alt={trend.title} className='rounded-xl w-full h-full' />
-                            <div className='flex flex-col absolute bottom-3 left-4  text-white font-light'>
-                                <div className='flex gap-3 text-sm '>
-                                    <p>{trend.year}</p>
-                                    <p>{trend.category}</p>
-                                    <p>{trend.rating}</p>
+                        <div className='contenedorGeneral  w-[240px] h-[140px]  md:w-[470px] md:h-[230px] rounded-xl relative'>
+                            <img  src={trend.thumbnail.trending?.small} alt={trend.title} className='img rounded-xl w-full h-full' />
+                            <div className='contenedorDatos flex flex-col absolute bottom-3 left-4  text-white font-light' id='informe'>
+                                <div className='flex gap-3 text-sm contenedorLista' id='lista'>
+                                    <p className='año'>{trend.year}</p>
+                                    <p className='categoria'>{trend.category}</p>
+                                    <p className='rating'>{trend.rating}</p>
                                 </div>
-                                <Link to={`/detalle/${trend.title}`}>    
-                                    <h3>{trend.title}</h3>
+                                <Link to={`/detalle/${trend.title}`} >    
+                                    <h3 className='titulo'>{trend.title}</h3>
                                 </Link>
                             </div>
-                            <div
+                            <button
                                 className='absolute top-2 right-2 xl:top-3 xl:right-3 xl:w-9 cursor-pointer  p-2 w-7 rounded-full bg-gray flex justify-center'
-                                onClick={() => handleToggleActive(index)}
+                                onClick={(e) => {
+                                     handleToggleActive(index)
+                                    añadirOEliminar(e)
+                                }}
                             >
                                 <img src={activeList[index] === false ? guardado : guardar} alt='save' className='w-4' />
-                            </div>
+                            </button>
                         </div>
                     </div>
                 ))}
