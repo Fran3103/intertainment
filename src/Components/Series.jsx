@@ -6,11 +6,11 @@ import guardado from '../assets/icon-bookmark-full.svg';
 import logoTv from '../assets/icon-category-tv.svg'
 import { useEffect, useState } from 'react';
 
-const Series = ({ añadirOEliminarAll }) => {
+const Series = ({ añadirOEliminarAll, busqueda = '' }) => {
 
     const dataTrending = datos.filter((trend) => trend.thumbnail.regular);
     const [activeList, setActiveList] = useState(new Array(dataTrending.length).fill(true));
-
+    const [resultado, setResultado] = useState([])
     const data = datos.filter((dato) => dato.category === 'TV Series')
     
     const handleToggleActive = (index) => {
@@ -27,6 +27,17 @@ const Series = ({ añadirOEliminarAll }) => {
         })
         setActiveList(newActiveList)
     }, [])
+
+
+    useEffect(() => {
+        if (!busqueda) {
+          setResultado(data);
+        } else {
+            const filteredData = data.filter((dato) => dato.title && dato.title.toLowerCase().includes(busqueda.toLowerCase()));
+    
+          setResultado(filteredData);
+        }
+      }, [busqueda]);
   return (
 
     
@@ -35,7 +46,7 @@ const Series = ({ añadirOEliminarAll }) => {
 
         <div className='grid grid-cols-2   md:grid-cols-3 xl:grid-cols-4 2xl:grid-cols-5  gap-5 mt-5 w-full '>
         {
-            data.map((dato, index) => {
+            resultado.map((dato, index) => {
                 return (
                     <div key={dato.title} className='flex flex-col w-full mb-12 relative'>
                         <div className='w-full rounded-lg relative  flex '>
@@ -74,7 +85,8 @@ const Series = ({ añadirOEliminarAll }) => {
 }
 
 Series.propTypes = {
-    añadirOEliminarAll: PropTypes.func.isRequired, // Puedes ajustar el tipo según sea necesario
+    añadirOEliminarAll: PropTypes.func.isRequired,
+    busqueda: PropTypes.string.isRequired // Puedes ajustar el tipo según sea necesario
 };
 
 export default Series

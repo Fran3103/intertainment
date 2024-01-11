@@ -18,7 +18,7 @@ const Bookmark = ({favoritos, añadirOEliminarAll}) => {
   
   return (
     <div className="md:ml-36 md:m-8 p-4 mt-32 md:mt-24  ">
-        <h2 className="text-white text-2xl font-light md:text-4xl mb-5 mt-12">Bookmarked Movies</h2>
+        <h2 className="text-white text-2xl font-light md:text-4xl mb-2">Bookmarked Movies</h2>
         <div className='grid grid-cols-2   md:grid-cols-3 xl:grid-cols-4 2xl:grid-cols-5  gap-5 mt-5 w-full '>
             {
             peliculas.length > 0 ? ( peliculas.map((peli) => {
@@ -50,7 +50,7 @@ const Bookmark = ({favoritos, añadirOEliminarAll}) => {
                         </div>
                     )
                 })) : (
-                    <h2 className="text-white md:w-[600px]  text-2xl font-light md:text-3xl mb-12"> No hay Peliculas seleccionadas</h2>
+                    <h2 className="text-white md:w-[600px]  text-2xl font-light md:text-3xl mb-2"> No hay Peliculas seleccionadas</h2>
                 )
             }
         </div>

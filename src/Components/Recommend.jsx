@@ -1,45 +1,45 @@
-import data from '../data.json';
-import PropTypes from 'prop-types'
+import PropTypes from 'prop-types';
+import data from '../data.json'
 import guardar from '../assets/icon-bookmark-empty.svg';
 import guardado from '../assets/icon-bookmark-full.svg';
-import logoMovie from '../assets/icon-category-movie.svg'
-import logoSerie from '../assets/icon-category-tv.svg'
+import logoMovie from '../assets/icon-category-movie.svg';
+import logoSerie from '../assets/icon-category-tv.svg';
 import { useEffect, useState } from 'react';
 
+const Recommend = ({ añadirOEliminarAll, busqueda = '' }) => {
+  const dataTrending = data.filter((trend) => trend.thumbnail.regular);
+  const [activeList, setActiveList] = useState(new Array(dataTrending.length).fill(true));
+  const [resultado, setResultado] = useState([]); // Nuevo estado para guardar el resultado de la búsqueda
 
-const Recommend = ({ añadirOEliminarAll}) => {
+  const handleToggleActive = (index) => {
+    setResultado((prevResultado) => {
+      const newResultado = [...prevResultado];
+      newResultado[index].active = !newResultado[index].active;
+      return newResultado;
+    });
+  };
 
-    const dataTrending = data.filter((trend) => trend.thumbnail.regular);
-    const [activeList, setActiveList] = useState(new Array(dataTrending.length).fill(true));
+  useEffect(() => {
+    const favoritosArray = localStorage.getItem('secFavoritos');
+    const arrayFav = JSON.parse(favoritosArray) || [];
+    const newActiveList = data.map((dato) => arrayFav.some((fav) => fav.titulo === dato.title));
+    setActiveList(newActiveList);
+  }, [resultado]);
 
+  useEffect(() => {
+    if (!busqueda) {
+      setResultado(data);
+    } else {
+        const filteredData = data.filter((dato) => dato.title && dato.title.toLowerCase().includes(busqueda.toLowerCase()));
 
-   
-
-    const handleToggleActive = (index) => {
-        const newActiveList = [...activeList];
-        newActiveList[index] = !newActiveList[index];
-        setActiveList(newActiveList);
-        
-        
-    };
-    Recommend.propTypes = {
-        añadirOEliminarAll: PropTypes.func.isRequired,
-
-    };
-
-    useEffect(() => {
-        const favoritosArray = localStorage.getItem('secFavoritos')
-        const arrayFav = JSON.parse(favoritosArray) || []
-        const newActiveList = data.map(dato => {
-            return arrayFav.some(fav => fav.titulo === dato.title);
-        })
-        setActiveList(newActiveList)
-    }, [])
+      setResultado(filteredData);
+    }
+  }, [busqueda]);
 
   return (
     <div className='grid grid-cols-2   md:grid-cols-3 xl:grid-cols-4 2xl:grid-cols-5  gap-5 mt-5 w-full '>
         {
-            data.map((dato, index) => {
+            resultado.map((dato, index) => {
                 return (
                     <div key={dato.title} className='flex flex-col w-full mb-12 relative'>
                         <div className='w-full rounded-lg relative  flex '>
@@ -71,7 +71,14 @@ const Recommend = ({ añadirOEliminarAll}) => {
             }) 
         }
     </div>
-  )
-}
 
+    
+  )
+
+  
+}
+Recommend.propTypes = {
+  añadirOEliminarAll: PropTypes.func.isRequired,
+  busqueda: PropTypes.string.isRequired,
+};
 export default Recommend

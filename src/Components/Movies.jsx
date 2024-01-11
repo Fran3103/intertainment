@@ -5,11 +5,12 @@ import guardado from '../assets/icon-bookmark-full.svg';
 import logoMovie from '../assets/icon-category-movie.svg'
 import { useEffect, useState } from 'react';
 
-const Movies = ({ añadirOEliminarAll}) => {
+const Movies = ({ añadirOEliminarAll, busqueda = ''}) => {
 
     const dataTrending = datos.filter((trend) => trend.thumbnail.regular);
     const [activeList, setActiveList] = useState(new Array(dataTrending.length).fill(true));
     const data = datos.filter((dato) => dato.category === 'Movie')
+    const [resultado, setResultado] = useState([])
 
     const handleToggleActive = (index) => {
         const newActiveList = [...activeList];
@@ -26,10 +27,19 @@ const Movies = ({ añadirOEliminarAll}) => {
         setActiveList(newActiveList)
     }, [])
 
+    useEffect(() => {
+        if (!busqueda) {
+          setResultado(data);
+        } else {
+            const filteredData = data.filter((dato) => dato.title && dato.title.toLowerCase().includes(busqueda.toLowerCase()));
+    
+          setResultado(filteredData);
+        }
+      }, [busqueda]);
 
     Movies.propTypes = {
         añadirOEliminarAll: PropTypes.func.isRequired,
-
+        busqueda: PropTypes.string.isRequired
     };
   return (
 
@@ -39,7 +49,7 @@ const Movies = ({ añadirOEliminarAll}) => {
 
         <div className='grid grid-cols-2   md:grid-cols-3 xl:grid-cols-4 2xl:grid-cols-5  gap-5 mt-5 w-full '>
         {
-            data.map((dato, index) => {
+            resultado.map((dato, index) => {
                 return (
                     <div key={dato.title} className='flex flex-col w-full mb-12 relative  '>
                         <div className='w-full rounded-lg relative  flex '>

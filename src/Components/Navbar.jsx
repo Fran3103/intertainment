@@ -1,5 +1,6 @@
 import  { useState } from 'react';
 import { Link } from 'react-router-dom';
+import PropTypes from 'prop-types'
 import logo from '../assets/logo.svg';
 import home from '../assets/icon-nav-home.svg';
 import homeActive from '../assets/icon-nav-home-active.svg';
@@ -11,11 +12,13 @@ import bookmark from '../assets/icon-nav-bookmark.svg';
 import bookmarkActive from '../assets/icon-bookmark-full.svg';
 import avatar from '../assets/image-avatar.png';
 
-const Navbar = () => {
+const Navbar = ({ setBusqueda }) => {
   const [activeIcon, setActiveIcon] = useState('home');
 
   const handleIconClick = (icon) => {
     setActiveIcon(icon);
+    setBusqueda('')
+  
   };
 
   return (
@@ -31,7 +34,7 @@ const Navbar = () => {
                 src={activeIcon === 'home' ? homeActive : home}
                 alt="home"
                 className="size-7 hover:fill-white"
-                onClick={() => handleIconClick('home')}
+                onClick={() => handleIconClick('home' ) }
               />
             </Link>
           </li>
@@ -120,4 +123,9 @@ const Navbar = () => {
   );
 };
 
+
+Navbar.propTypes = {
+    busqueda: PropTypes.string.isRequired,
+    setBusqueda: PropTypes.func.isRequired // Puedes ajustar el tipo según sea necesario
+};
 export default Navbar;

@@ -11,7 +11,12 @@ import { useEffect, useState } from 'react'
 
 function App() {
     const [favoritos, setFavoritos] = useState([])
+    const [busqueda, setBusqueda] = useState("")
 
+    const resultadoBusqueda = (e) =>{
+       setBusqueda(e.target.value)
+
+    }
 
     useEffect(() => {
         const favoritosArray = localStorage.getItem('secFavoritos')
@@ -128,13 +133,13 @@ function App() {
     <>
        
       
-      <Navbar/>
-      <Search/>
+      <Navbar busqueda={busqueda} setBusqueda={setBusqueda}/>
+      <Search resultadoBusqueda={resultadoBusqueda}/>
       <Routes >
-            <Route path='/' element={ <Home añadirOEliminar={añadirOEliminar} añadirOEliminarAll={añadirOEliminarAll} />}/>
-            <Route path='/movies' element={<Movies añadirOEliminarAll={añadirOEliminarAll}/>}/>
-            <Route path='/series' element={<Series añadirOEliminarAll={añadirOEliminarAll} />}/>
-            <Route path='/bookmark' element={<Bookmark favoritos={favoritos} añadirOEliminarAll={añadirOEliminarAll}/>}/>
+            <Route path='/' element={ <Home añadirOEliminar={añadirOEliminar} añadirOEliminarAll={añadirOEliminarAll} busqueda={busqueda} />}/>
+            <Route path='/movies' element={<Movies añadirOEliminarAll={añadirOEliminarAll} busqueda={busqueda}/>}/>
+            <Route path='/series' element={<Series añadirOEliminarAll={añadirOEliminarAll} busqueda={busqueda} />}/>
+            <Route path='/bookmark' element={<Bookmark favoritos={favoritos} añadirOEliminarAll={añadirOEliminarAll} busqueda={busqueda}/>}/>
       </Routes>
     </>
   )
