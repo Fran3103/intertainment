@@ -11,14 +11,14 @@ const Bookmark = ({favoritos}) => {
     
   return (
     <div className="md:ml-36 md:m-8 p-4 mt-32 md:mt-24  ">
-        <h1>Bookmarked Movies</h1>
+        <h2 className="text-white text-2xl font-light md:text-4xl mb-2">Bookmarked Movies</h2>
         <div className='grid grid-cols-2   md:grid-cols-3 xl:grid-cols-4 2xl:grid-cols-5  gap-5 mt-5 w-full '>
             {
             peliculas && peliculas.map((peli) => {
                     return (
                         < div key={peli.titulo} className='flex flex-col w-full mb-12'>
                             <div className='w-full rounded-lg relative  flex '>
-                                <img src={peli.img} alt={peli.title} />
+                                <img src={peli.img} alt={peli.title}  className='rounded-lg'/>
                                 
                                 <div className='absolute top-2 right-[3%]  p-2 w-7 2xl:w-10  2xl:h-10 rounded-full bg-gray flex justify-center cursor-pointer'>
                                     <img src={  guardado } alt="save" className='w-4  m-auto' />
@@ -43,14 +43,14 @@ const Bookmark = ({favoritos}) => {
             }
         </div>
         
-        <h2>Bookmarked TV Series</h2>
+        <h2 className="text-white text-2xl font-light md:text-4xl mb-2">Bookmarked TV Series</h2>
         <div className='grid grid-cols-2   md:grid-cols-3 xl:grid-cols-4 2xl:grid-cols-5  gap-5 mt-5 w-full '>
             {
             series && series.map((peli) => {
                     return (
                         < div key={peli.titulo} className='flex flex-col w-full mb-12'>
                             <div className='w-full rounded-lg relative  flex '>
-                                <img src={peli.img} alt={peli.title} />
+                                <img src={peli.img} alt={peli.title} className='rounded-lg' />
                                 
                                 <div className='absolute top-2 right-[3%]  p-2 w-7 2xl:w-10  2xl:h-10 rounded-full bg-gray flex justify-center cursor-pointer'>
                                     <img src={  guardado } alt="save" className='w-4  m-auto' />
