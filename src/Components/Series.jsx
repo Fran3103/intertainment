@@ -4,18 +4,29 @@ import PropTypes from 'prop-types'
 import guardar from '../assets/icon-bookmark-empty.svg';
 import guardado from '../assets/icon-bookmark-full.svg';
 import logoTv from '../assets/icon-category-tv.svg'
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 
 const Series = ({ añadirOEliminarAll }) => {
 
     const dataTrending = datos.filter((trend) => trend.thumbnail.regular);
     const [activeList, setActiveList] = useState(new Array(dataTrending.length).fill(true));
+
     const data = datos.filter((dato) => dato.category === 'TV Series')
+    
     const handleToggleActive = (index) => {
         const newActiveList = [...activeList];
         newActiveList[index] = !newActiveList[index];
         setActiveList(newActiveList);
     };
+
+    useEffect(() => {
+        const favoritosArray = localStorage.getItem('secFavoritos')
+        const arrayFav = JSON.parse(favoritosArray) || []
+        const newActiveList = data.map(dato => {
+            return arrayFav.some(fav => fav.titulo === dato.title);
+        })
+        setActiveList(newActiveList)
+    }, [])
   return (
 
     
@@ -49,7 +60,7 @@ const Series = ({ añadirOEliminarAll }) => {
                                      handleToggleActive(index)
                                     añadirOEliminarAll(e)
                                 }}>
-                                <img src={ activeList[index] === false ? guardado : guardar} alt="save" className='w-4  m-auto'/>
+                                <img src={ activeList[index] === false ? guardar : guardado} alt="save" className='w-4  m-auto'/>
                             </button>
                     </div>
                 )

@@ -99,7 +99,7 @@ function App() {
             categoria, año, rating, titulo,  img
         }
         
-        console.log(pelicula)
+        
         
         
         let favArray = secFavs.find(peli => {
@@ -134,7 +134,7 @@ function App() {
             <Route path='/' element={ <Home añadirOEliminar={añadirOEliminar} añadirOEliminarAll={añadirOEliminarAll} />}/>
             <Route path='/movies' element={<Movies añadirOEliminarAll={añadirOEliminarAll}/>}/>
             <Route path='/series' element={<Series añadirOEliminarAll={añadirOEliminarAll} />}/>
-            <Route path='/bookmark' element={<Bookmark favoritos={favoritos}/>}/>
+            <Route path='/bookmark' element={<Bookmark favoritos={favoritos} añadirOEliminarAll={añadirOEliminarAll}/>}/>
       </Routes>
     </>
   )

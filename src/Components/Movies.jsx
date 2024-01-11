@@ -3,7 +3,7 @@ import PropTypes from 'prop-types'
 import guardar from '../assets/icon-bookmark-empty.svg';
 import guardado from '../assets/icon-bookmark-full.svg';
 import logoMovie from '../assets/icon-category-movie.svg'
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 
 const Movies = ({ añadirOEliminarAll}) => {
 
@@ -16,6 +16,15 @@ const Movies = ({ añadirOEliminarAll}) => {
         newActiveList[index] = !newActiveList[index];
         setActiveList(newActiveList);
     };
+
+    useEffect(() => {
+        const favoritosArray = localStorage.getItem('secFavoritos')
+        const arrayFav = JSON.parse(favoritosArray) || []
+        const newActiveList = data.map(dato => {
+            return arrayFav.some(fav => fav.titulo === dato.title);
+        })
+        setActiveList(newActiveList)
+    }, [])
 
 
     Movies.propTypes = {
@@ -54,7 +63,7 @@ const Movies = ({ añadirOEliminarAll}) => {
                                      handleToggleActive(index)
                                     añadirOEliminarAll(e)
                                 }}>
-                                <img src={ activeList[index] === false ? guardado : guardar} alt="save" className='w-4  m-auto'/>
+                                <img src={ activeList[index] === false ? guardar : guardado} alt="save" className='w-4  m-auto'/>
                             </button>
 
                     </div>

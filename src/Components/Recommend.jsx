@@ -4,22 +4,37 @@ import guardar from '../assets/icon-bookmark-empty.svg';
 import guardado from '../assets/icon-bookmark-full.svg';
 import logoMovie from '../assets/icon-category-movie.svg'
 import logoSerie from '../assets/icon-category-tv.svg'
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
+
 
 const Recommend = ({ añadirOEliminarAll}) => {
 
     const dataTrending = data.filter((trend) => trend.thumbnail.regular);
     const [activeList, setActiveList] = useState(new Array(dataTrending.length).fill(true));
 
+
+   
+
     const handleToggleActive = (index) => {
         const newActiveList = [...activeList];
         newActiveList[index] = !newActiveList[index];
         setActiveList(newActiveList);
+        
+        
     };
     Recommend.propTypes = {
         añadirOEliminarAll: PropTypes.func.isRequired,
 
     };
+
+    useEffect(() => {
+        const favoritosArray = localStorage.getItem('secFavoritos')
+        const arrayFav = JSON.parse(favoritosArray) || []
+        const newActiveList = data.map(dato => {
+            return arrayFav.some(fav => fav.titulo === dato.title);
+        })
+        setActiveList(newActiveList)
+    }, [])
 
   return (
     <div className='grid grid-cols-2   md:grid-cols-3 xl:grid-cols-4 2xl:grid-cols-5  gap-5 mt-5 w-full '>
@@ -49,7 +64,7 @@ const Recommend = ({ añadirOEliminarAll}) => {
                                      handleToggleActive(index)
                                     añadirOEliminarAll(e)
                                 }}>
-                                <img src={ activeList[index] === false ? guardado : guardar} alt="save" className='w-4  m-auto'/>
+                                <img src={ activeList[index] === false ? guardar : guardado} alt="save" className='w-4  m-auto'/>
                             </button>
                     </div>
                 )

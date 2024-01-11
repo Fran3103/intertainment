@@ -3,7 +3,7 @@ import data from '../data.json';
 import PropTypes from 'prop-types'
 import guardar from '../assets/icon-bookmark-empty.svg';
 import guardado from '../assets/icon-bookmark-full.svg';
-import { useRef, useState } from 'react';
+import { useEffect, useRef, useState } from 'react';
 import { MdKeyboardArrowRight, MdKeyboardArrowLeft } from "react-icons/md"
 
 const Trending = ({ añadirOEliminar } ) => {
@@ -38,7 +38,14 @@ const Trending = ({ añadirOEliminar } ) => {
         handleScroll(-containerRef.current.clientWidth); // Mueve el scroll al ancho negativo del contenedor
     };
 
-
+    useEffect(() => {
+        const favoritosArray = localStorage.getItem('secFavoritos')
+        const arrayFav = JSON.parse(favoritosArray) || []
+        const newActiveList = data.map(dato => {
+            return arrayFav.some(fav => fav.titulo === dato.title);
+        })
+        setActiveList(newActiveList)
+    }, [])
 
 
 
@@ -75,7 +82,7 @@ const Trending = ({ añadirOEliminar } ) => {
                                     añadirOEliminar(e)
                                 }}
                             >
-                                <img src={activeList[index] === false ? guardado : guardar} alt='save' className='w-4' />
+                                <img src={activeList[index] === false ? guardar : guardado} alt='save' className='w-4' />
                             </button>
                         </div>
                     </div>
